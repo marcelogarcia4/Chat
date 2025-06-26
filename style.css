@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+#chat-window {
+    height: 400px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #e2f0cb; /* Light green */
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.ai-message {
+    background-color: #d0e7ff; /* Light blue */
+    align-self: flex-start;
+    margin-right: auto;
+}
+
+/* Product Card Styling */
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card .card-img-top {
+    height: 180px;
+    object-fit: contain; /* Keeps image aspect ratio, fits within box */
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.product-card .card-body {
+    padding: 15px;
+}
+
+.product-card .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    height: 3em; /* Limit title height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show up to 2 lines */
+    -webkit-box-orient: vertical;
+}
+
+.product-card .price {
+    font-size: 1.25rem;
+    color: #28a745; /* Green for price */
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.product-card .source {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.product-card .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 15px;
+}
