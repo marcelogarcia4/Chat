@@ -8,11 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const productSpinner = document.getElementById('product-spinner');
     const productErrorMessage = document.getElementById('product-error-message');
 
-    // === WARNING: Your API Keys Will Be Exposed Here! ===
-    // REPLACE THESE PLACEHOLDERS WITH YOUR ACTUAL KEYS
-    const DEEPSEEK_API_KEY = "sk-or-v1-YOUR_DEEPSEEK_API_KEY_HERE";
-    const RAPIDAPI_KEY = "YOUR_RAPIDAPI_KEY_HERE";
-    // ====================================================
+    // === TUS CLAVES API ESTÁN INSERTADAS AQUÍ. TEN EN CUENTA LA ADVERTENCIA DE SEGURIDAD ANTERIOR. ===
+    const DEEPSEEK_API_KEY = "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";
+    const RAPIDAPI_KEY = "fc3af22cc3msh41c305ad918e17cp1659e4jsnbb9ff6802d24";
+    // ==============================================================================================
 
     // Direct API Endpoints
     const DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions";
@@ -109,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hideProductError();
         productDisplayArea.innerHTML = '';
 
-        if (!DEEPSEEK_API_KEY || DEEPSEEK_API_KEY === "sk-or-v1-YOUR_DEEPSEEK_API_KEY_HERE") {
-            displayMessage('ai', "Error: Deepseek API Key is missing or not configured. Please open script.js and add your key.");
+        if (!DEEPSEEK_API_KEY || DEEPSEEK_API_KEY === "TU_KEY_DEEPSEEK_AQUI") {
+            displayMessage('ai', "Error: La clave API de Deepseek no está configurada. Abre script.js y añade tu clave.");
             showChatSpinner(false);
             return;
         }
@@ -150,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: "Unknown error from Deepseek." }));
-                throw new Error(errorData.message || `Deepseek API error: ${response.status}`);
+                const errorData = await response.json().catch(() => ({ message: "Error desconocido de Deepseek." }));
+                throw new Error(errorData.message || `Error de la API de Deepseek: ${response.status}`);
             }
 
             const data = await response.json();
@@ -166,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const parsedAction = JSON.parse(aiMessageContent);
                     if (parsedAction.action === 'search' && Array.isArray(parsedAction.keywords) && parsedAction.keywords.length > 0) {
                         action = parsedAction;
-                        userDisplayReply = "Okay, I'm searching for products based on your request now!";
+                        userDisplayReply = "¡De acuerdo, estoy buscando productos según tu solicitud ahora!";
                     }
                 }
             } catch (e) {
@@ -181,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (error) {
-            console.error('Error in Deepseek interaction:', error);
-            displayMessage('ai', `Sorry, I encountered an error with the AI: ${error.message}. Please try again.`);
+            console.error('Error en la interacción con Deepseek:', error);
+            displayMessage('ai', `Lo siento, encontré un error con la IA: ${error.message}. Por favor, inténtalo de nuevo.`);
             conversationHistory.push({ role: 'assistant', content: `Error: ${error.message}` });
         } finally {
             showChatSpinner(false);
@@ -191,12 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function searchProducts(keywords) {
         if (!keywords || keywords.length === 0) {
-            showProductError("The AI didn't provide valid keywords to search for.");
+            showProductError("La IA no proporcionó palabras clave válidas para buscar.");
             return;
         }
 
-        if (!RAPIDAPI_KEY || RAPIDAPI_KEY === "YOUR_RAPIDAPI_KEY_HERE") {
-            showProductError("Error: RapidAPI Key is missing or not configured. Please open script.js and add your key.");
+        if (!RAPIDAPI_KEY || RAPIDAPI_KEY === "TU_KEY_RAPIDAPI_AQUI") {
+            showProductError("Error: La clave API de RapidAPI no está configurada. Abre script.js y añade tu clave.");
             showProductSpinner(false);
             return;
         }
@@ -222,8 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: "Unknown error from RapidAPI." }));
-                throw new Error(errorData.message || `RapidAPI error: ${response.status}`);
+                const errorData = await response.json().catch(() => ({ message: "Error desconocido de RapidAPI." }));
+                throw new Error(errorData.message || `Error de la API de RapidAPI: ${response.status}`);
             }
 
             const rapidapiData = await response.json();
@@ -233,8 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
             displayProducts(products);
 
         } catch (error) {
-            console.error('Error fetching products:', error);
-            showProductError(`Failed to fetch products: ${error.message}. Please try a different query.`);
+            console.error('Error al buscar productos:', error);
+            showProductError(`No se pudieron buscar productos: ${error.message}. Intenta una consulta diferente.`);
         } finally {
             showProductSpinner(false);
         }
@@ -246,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideProductError();
 
         if (!products || products.length === 0) {
-            showProductError('No products found matching your criteria. Try rephrasing your request or being more specific.');
+            showProductError('No se encontraron productos que coincidan con tus criterios. Intenta reformular tu solicitud o ser más específico.');
             return;
         }
 
@@ -264,10 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="card-body">
                             <h5 class="card-title" title="${productTitle}">${productTitle}</h5>
                             <p class="card-text price">${productPrice}</p>
-                            <p class="card-text source">Source: ${sourceName}</p>
+                            <p class="card-text source">Fuente: ${sourceName}</p>
                         </div>
                         <div class="card-footer text-center">
-                             <a href="${productUrl}" target="_blank" class="btn btn-success w-100">View Product</a>
+                             <a href="${productUrl}" target="_blank" class="btn btn-success w-100">Ver Producto</a>
                         </div>
                     </div>
                 </div>
@@ -286,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial AI Greeting ---
     function initialGreeting() {
-        const greeting = "Hello! I'm your AI Product Assistant. Tell me, what kind of product are you looking for today, and what are your needs?";
+        const greeting = "¡Hola! Soy tu asistente de productos con IA. Dime, ¿qué tipo de producto estás buscando hoy y cuáles son tus necesidades?";
         conversationHistory.push({ role: 'assistant', content: greeting });
         displayMessage('ai', greeting);
     }
